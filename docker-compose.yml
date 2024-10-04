@@ -7,12 +7,12 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:443"
-      # - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      # - "--certificatesresolvers.myresolver.acme.email=khawley1231@gmail.com"
-      # - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=khawley1231@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
       - "--entrypoints.web.address=:80"
-      # - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
-      # - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
     ports:
       - 80:80
       - 443:443
@@ -25,9 +25,8 @@ services:
     container_name: "nginx"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nginx.rule=Host(`localhost`)"
-      - "traefik.http.routers.nginx.entrypoints=web"
-      # - "traefik.http.routers.nginx.entrypoints=websecure"
-      # - "traefik.http.routers.nginx.tls.certresolver=myresolver"
+      - "traefik.http.routers.nginx.rule=Host(`snoozingfish.com`)"
+      - "traefik.http.routers.nginx.entrypoints=websecure"
+      - "traefik.http.routers.nginx.tls.certresolver=myresolver"
     volumes:
       - ./src:/usr/share/nginx/html
