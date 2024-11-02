@@ -19,7 +19,7 @@ def index():
 @app.route("/nl-listings")
 def listings_page():
     conn = get_db_connection()
-    listings = conn.execute("SELECT * FROM listings").fetchall()
+    listings = conn.execute("SELECT * FROM listings WHERE is_new = 1").fetchall()
     conn.close()
     return render_template("listings.html", listings=listings)
 
