@@ -34,7 +34,7 @@ services:
 
   flask-app:
     build:
-      contex: .
+      context: .
       dockerfile: Dockerfile
     container_name: "flask-app"
     labels:
