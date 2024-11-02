@@ -49,3 +49,4 @@ services:
       - ~/scripts/nl-rentals/listings.db:/app/listings.db
     environment:
       - FLASK_ENV=production
+      - FLASK_DEBUG=0
