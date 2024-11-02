@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>SnoozingFish</title>
+    <style>
+      .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      img {
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="centered">
+      <img
+        src="{{ url_for('static', filename='assets/snoozingfish1024.png') }}"
+        alt="Snoozing Fish"
+      />
+    </div>
+  </body>
+</html>

@@ -21,13 +21,31 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./letsencrypt:/letsencrypt"
 
-  nginx:
-    image: nginx:alpine
-    container_name: "nginx"
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: "nginx"
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.nginx.rule=Host(`snoozingfish.com`)"
+  #     - "traefik.http.routers.nginx.entrypoints=websecure"
+  #     - "traefik.http.routers.nginx.tls.certresolver=myresolver"
+  #   volumes:
+  #     - ./src:/usr/share/nginx/html
+
+  flask-app:
+    build:
+      contex: .
+      dockerfile: Dockerfile
+    container_name: "flask-app"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nginx.rule=Host(`snoozingfish.com`)"
-      - "traefik.http.routers.nginx.entrypoints=websecure"
-      - "traefik.http.routers.nginx.tls.certresolver=myresolver"
+      - "traefik.http.routers.flask-app.rule=Host(`snoozingfish.com`)"
+      - "traefik.http.routers.flask-app.entrypoints=websecure"
+      - "traefik.http.routers.flask-app.tls.certresolver=myresolver"
+    ports:
+      - 5000:5000
     volumes:
-      - ./src:/usr/share/nginx/html
+      - ./src:/app
+      - ~/scripts/nl-rentals/listings.db:/app/listings.db
+    environment:
+      - FLASK_ENV=production
